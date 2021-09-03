@@ -31,7 +31,7 @@ const Profile = () => {
   );
 
   const { user: loadedUser, loading } = useSelector(
-    (state: RootState) => state.loadedUser.user
+    (state: RootState) => state.loadedUser
   );
   const {
     error,
@@ -131,14 +131,25 @@ const Profile = () => {
                   <div className="d-flex align-items-center">
                     <div>
                       <figure className="avatar mr-3 item-rtl">
-                        <Image
-                          src={avatarPreview}
-                          className="rounded-circle"
-                          alt="image"
-                          width={300}
-                          height={200}
-                          layout="responsive"
-                        />
+                        {avatarPreview ? (
+                          <Image
+                            src={avatarPreview}
+                            className="rounded-circle"
+                            alt="image"
+                            width={300}
+                            height={200}
+                            layout="responsive"
+                          />
+                        ) : (
+                          <Image
+                            src="/images/default_avatar.jpg"
+                            className="rounded-circle"
+                            alt="image"
+                            width={300}
+                            height={200}
+                            layout="responsive"
+                          />
+                        )}
                       </figure>
                     </div>
                     <div className="custom-file">

@@ -27,7 +27,7 @@ const Home = () => {
     router.push(`/?page=${pageNumber}`);
   };
 
-  let count = roomsCount;
+  let count = filteredRoomsCount ?? roomsCount;
 
   return (
     <>

@@ -10,7 +10,6 @@ import ButtonLoader from "../layout/ButtonLoader";
 
 const NewRoom = () => {
   const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
   const [category, setCategory] = useState("Cola");
@@ -95,22 +94,11 @@ const NewRoom = () => {
               />
             </div>
             <div className="form-group">
-              <label htmlFor="price_field">Price</label>
-              <input
-                type="text"
-                id="price_field"
-                className="form-control"
-                value={price}
-                onChange={(e) => setPrice(e.target.value)}
-                required
-              />
-            </div>
-            <div className="form-group">
               <label htmlFor="description_field">Description</label>
               <textarea
                 className="form-control"
                 id="description_field"
-                rows="8"
+                rows={8}
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 required
@@ -175,18 +163,19 @@ const NewRoom = () => {
                 </label>
               </div>
 
-              {imagesPreview.map(
-                (img) =>
-                  img ?? (
-                    <Image
-                      src={img}
-                      key={img}
-                      alt="Images Preview"
-                      className="mt-3 mr-2"
-                      width="55"
-                      height="52"
-                    />
-                  )
+              {imagesPreview.map((img) =>
+                img ? (
+                  <Image
+                    src={img}
+                    key={img}
+                    alt="Images Preview"
+                    className="mt-3 mr-2"
+                    width="55"
+                    height="52"
+                  />
+                ) : (
+                  ""
+                )
               )}
             </div>
             <button

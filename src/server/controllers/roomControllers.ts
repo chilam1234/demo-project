@@ -3,7 +3,6 @@ import FileService from "../services/file.service";
 import QueryManager from "../utils/Query";
 import ErrorHandler from "../utils/errorHandler";
 
-// Create all rooms   =>   /api/rooms
 const allRooms = async (req, res) => {
   const pageSize = 8;
 
@@ -29,7 +28,6 @@ const allRooms = async (req, res) => {
   });
 };
 
-// Create new room   =>   /api/rooms
 const newRoom = async (req, res) => {
   const images = req.body.images;
 
@@ -57,7 +55,6 @@ const newRoom = async (req, res) => {
   });
 };
 
-// Get room details   =>   /api/rooms/:id
 const getSingleRoom = async (req, res, next) => {
   const room = await Room.findById(req.query.id);
 
@@ -71,7 +68,6 @@ const getSingleRoom = async (req, res, next) => {
   });
 };
 
-// Update room details   =>   /api/rooms/:id
 const updateRoom = async (req, res, next) => {
   let room = await Room.findById(req.query.id);
 
@@ -114,7 +110,6 @@ const updateRoom = async (req, res, next) => {
   });
 };
 
-// Delete room   =>   /api/rooms/:id
 const deleteRoom = async (req, res, next) => {
   const room = await Room.findById(req.query.id);
 
@@ -135,7 +130,6 @@ const deleteRoom = async (req, res, next) => {
   });
 };
 
-// Get all rooms - ADMIN   =>   /api/admin/rooms
 const allAdminRooms = async (req, res) => {
   const rooms = await Room.find();
 

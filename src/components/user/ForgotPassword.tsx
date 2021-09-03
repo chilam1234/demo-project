@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
-import { forgotPassword, clearErrors } from "../../redux/actions/userActions";
 import { forgotPasswordThunk } from "../../redux/actions/userAsyncThunkActions";
 import { forgotPasswordSlice } from "../../redux/slices/userSlices";
+import { RootState } from "../../redux/store";
 import ButtonLoader from "../layout/ButtonLoader";
 
 const ForgotPassword = () => {
@@ -12,8 +12,8 @@ const ForgotPassword = () => {
 
   const dispatch = useDispatch();
 
-  const { error, loading, message } = useSelector(
-    (state) => state.forgotPassword
+  const { error, loading, message, success } = useSelector(
+    (state: RootState) => state.forgotPassword
   );
 
   useEffect(() => {
@@ -21,11 +21,11 @@ const ForgotPassword = () => {
       toast.error(error);
       dispatch(forgotPasswordSlice.actions.clearErrors());
     }
-
-    if (message) {
+    console.log(success);
+    if (success) {
       toast.success(message);
     }
-  }, [dispatch, message, error]);
+  }, [dispatch, message, error, success]);
 
   const submitHandler = (e) => {
     e.preventDefault();

@@ -1,7 +1,7 @@
 import { NextApiRequest, NextApiResponse } from "next";
 import nc from "next-connect";
 
-import onError from "../../../../middlewares/errors";
+import onError from "../../../../src/server/middlewares/errors";
 import { registerUser } from "../../../server/controllers/authControllers";
 import dbConnect from "../../../server/lib/dbConnect";
 

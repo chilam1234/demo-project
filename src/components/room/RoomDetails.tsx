@@ -34,9 +34,11 @@ const RoomDetails = () => {
   const { error: createBookingError } = useSelector<RootState>(
     (state) => state.booking
   );
-  const { available, loading: bookingLoading } = useSelector<RootState>(
-    (state) => state.checkBooking
-  );
+  const {
+    available,
+    loading: bookingLoading,
+    error: checkBookingError,
+  } = useSelector<RootState>((state) => state.checkBooking);
 
   const excludedDates = [];
   const bookedDateEvents = [];
@@ -92,6 +94,13 @@ const RoomDetails = () => {
     };
   }, [dispatch, error, id]);
 
+  useEffect(() => {
+    toast.error(checkBookingError);
+    return () => {
+      dispatch({ type: CHECK_BOOKING_RESET });
+    };
+  }, [checkBookingError, dispatch]);
+
   return (
     <>
       <Head>
@@ -116,6 +125,10 @@ const RoomDetails = () => {
                     layout="responsive"
                   />
                 </div>
+                <Carousel.Caption>
+                  <h5>Room Picture</h5>
+                  <p>This is a room picture</p>
+                </Carousel.Caption>
               </Carousel.Item>
             ))}
         </Carousel>
@@ -123,7 +136,7 @@ const RoomDetails = () => {
           <div className="col-12 col-md-8 col-lg-8">
             <h3>Availability</h3>
             <BookingCalendar events={bookedDateEvents} />
-            <h3>Description</h3>
+            <h3 className="mt-5">Description</h3>
             <p>{room.description}</p>
 
             <RoomFeatures room={room} />

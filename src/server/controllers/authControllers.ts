@@ -108,7 +108,7 @@ const forgotPassword = async (req, res, next) => {
   try {
     await sendEmail({
       email: user.email,
-      subject: "myDemo Password Recovery",
+      subject: "Demo System Password Recovery",
       message,
     });
 

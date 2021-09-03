@@ -1,11 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-const commonConfigHeader = {
-  headers: {
-    "Content-Type": "application/json",
-  },
-};
+import { commonConfigHeader } from "../../constants";
 
 export const registerUserThunk = createAsyncThunk<any, any>(
   "users/register",

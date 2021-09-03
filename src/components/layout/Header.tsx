@@ -6,7 +6,6 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { loadUserThunk } from "../../redux/actions/userAsyncThunkActions";
 import { RootState } from "../../redux/store";
-import styles from "./style.module.css";
 
 const Header = () => {
   const dispatch = useDispatch();
@@ -66,7 +65,7 @@ const Header = () => {
                 className="dropdown-menu"
                 aria-labelledby="dropDownMenuButton"
               >
-                {data.role === "admin" && (
+                {data.user.role === "admin" && (
                   <>
                     <Link href="/admin/rooms">
                       <a className="dropdown-item">Rooms</a>

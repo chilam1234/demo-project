@@ -147,11 +147,13 @@ export const forgotPasswordSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(forgotPasswordThunk.fulfilled, (state, action) => {
       state.loading = false;
-      state.message = action.payload;
+      state.success = true;
+      state.message = action.payload.message;
     });
     builder.addCase(resetPasswordThunk.fulfilled, (state, action) => {
       state.loading = false;
-      state.success = action.payload;
+      state.success = true;
+      state.message = action.payload.message;
     });
     builder.addMatcher(
       (action) =>

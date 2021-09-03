@@ -15,7 +15,6 @@ import Loader from "../layout/Loader";
 
 const UpdateRoom = () => {
   const [name, setName] = useState("");
-  const [price, setPrice] = useState(0);
   const [description, setDescription] = useState("");
   const [address, setAddress] = useState("");
   const [category, setCategory] = useState("King");
@@ -129,17 +128,6 @@ const UpdateRoom = () => {
                   />
                 </div>
                 <div className="form-group">
-                  <label htmlFor="price_field">Price</label>
-                  <input
-                    type="text"
-                    id="price_field"
-                    className="form-control"
-                    value={price}
-                    onChange={(e) => setPrice(e.target.value)}
-                    required
-                  />
-                </div>
-                <div className="form-group">
                   <label htmlFor="description_field">Description</label>
                   <textarea
                     className="form-control"
@@ -170,7 +158,7 @@ const UpdateRoom = () => {
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
                   >
-                    {["King", "Single", "Twins"].map((category) => (
+                    {["Cola", "Pepsi"].map((category) => (
                       <option key={category} value={category}>
                         {category}
                       </option>
@@ -210,33 +198,35 @@ const UpdateRoom = () => {
                     </label>
                   </div>
 
-                  {imagesPreview.map(
-                    (img) =>
-                      img ?? (
-                        <Image
-                          src={img}
-                          key={img}
-                          alt="Images Preview"
-                          className="mt-3 mr-2"
-                          width="55"
-                          height="52"
-                        />
-                      )
+                  {imagesPreview.map((img) =>
+                    img ? (
+                      <Image
+                        src={img}
+                        key={img}
+                        alt="Images Preview"
+                        className="mt-3 mr-2"
+                        width="55"
+                        height="52"
+                      />
+                    ) : (
+                      ""
+                    )
                   )}
 
                   {oldImages &&
-                    oldImages.map(
-                      (img) =>
-                        img ?? (
-                          <Image
-                            src={img.url}
-                            key={img.public_id}
-                            alt="Images Preview"
-                            className="mt-3 mr-2"
-                            width={55}
-                            height={52}
-                          />
-                        )
+                    oldImages.map((img) =>
+                      img ? (
+                        <Image
+                          src={img.url}
+                          key={img.public_id}
+                          alt="Images Preview"
+                          className="mt-3 mr-2"
+                          width={55}
+                          height={52}
+                        />
+                      ) : (
+                        ""
+                      )
                     )}
                 </div>
                 <button
