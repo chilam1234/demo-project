@@ -1,5 +1,6 @@
 import { UploadApiResponse } from "cloudinary";
 import crypto from "crypto";
+import { NextApiRequest, NextApiResponse } from "next";
 import absoluteUrl from "next-absolute-url";
 
 import User from "../models/user";
@@ -8,7 +9,7 @@ import ErrorHandler from "../utils/errorHandler";
 import sendEmail from "../utils/sendEmail";
 
 // Register user   =>   /api/auth/register
-const registerUser = async (req, res) => {
+const registerUser = async (req: NextApiRequest, res: NextApiResponse) => {
   const { name, email, password, avatar, company } = req.body;
 
   let result: UploadApiResponse | undefined;
@@ -21,7 +22,9 @@ const registerUser = async (req, res) => {
     result = undefined;
   }
 
-  await User.create({
+  const userExists = await User.findOne({ email: email });
+
+  const newUser = new User({
     name,
     email,
     password,
@@ -33,6 +36,24 @@ const registerUser = async (req, res) => {
         }
       : undefined,
   });
+  let validateError = newUser.validateSync();
+  if (validateError) {
+    const message = Object.entries(error.errors).reduce((errs, [_, err]) => {
+      return errs.concat(`\n ${err.message}`);
+    }, "");
+
+    throw new ErrorHandler(message, 400);
+  }
+
+  if (userExists) {
+    throw new ErrorHandler("Email was already registered", 400);
+  }
+
+  try {
+    await newUser.save();
+  } catch (err) {
+    throw new ErrorHandler(err.message, 500);
+  }
 
   res.status(201).json({
     success: true,
