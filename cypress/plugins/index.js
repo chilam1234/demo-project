@@ -11,6 +11,7 @@
 
 // This function is called when a project is opened or re-opened (e.g. due to
 // the project's config changing)
+import { signIn } from "next-auth/client";
 
 /**
  * @type {Cypress.PluginConfig}
@@ -19,4 +20,15 @@
 module.exports = (on, config) => {
   // `on` is used to hook into various events Cypress emits
   // `config` is the resolved Cypress config
-}
+  on("task", {
+    // prettier-ignore
+    async "signIn"({ email, password }) {
+      const result = await signIn("credentials", {
+        redirect: false,
+        email,
+        password,
+      });
+      return result;
+    }
+  });
+};

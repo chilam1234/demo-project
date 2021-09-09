@@ -8,7 +8,6 @@ import { toast } from "react-toastify";
 import { clearErrors, deleteBooking } from "../../redux/actions/bookingActions";
 import { DELETE_BOOKING_RESET } from "../../redux/constants/bookingConstants";
 import { RootState } from "../../redux/store";
-import BookingCalendar from "./BookingCalendar";
 
 const MyBookings = () => {
   const dispatch = useDispatch();

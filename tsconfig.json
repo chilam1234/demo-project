@@ -24,12 +24,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
+    "types": ["cypress", "@testing-library/cypress"],
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx"
-, "src/server/utils/sendEmail.js", "src/server/utils/seeder.ts"  ],
+, "src/server/utils/sendEmail.js", "src/server/utils/seeder.ts", "cypress/integration/3-Login/register.spec.js"  ],
   "exclude": [
     "node_modules"
   ]

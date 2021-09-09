@@ -38,9 +38,12 @@ const registerUser = async (req: NextApiRequest, res: NextApiResponse) => {
   });
   let validateError = newUser.validateSync();
   if (validateError) {
-    const message = Object.entries(error.errors).reduce((errs, [_, err]) => {
-      return errs.concat(`\n ${err.message}`);
-    }, "");
+    const message = Object.entries(validateError.errors).reduce(
+      (errs, [_, err]) => {
+        return errs.concat(`\n ${err.message}`);
+      },
+      ""
+    );
 
     throw new ErrorHandler(message, 400);
   }

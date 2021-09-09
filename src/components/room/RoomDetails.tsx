@@ -52,6 +52,9 @@ const RoomDetails = () => {
   });
 
   const onChange = (date: Date) => {
+    if (date == undefined) {
+      return;
+    }
     const startDateTime = moment(date);
     setStartDateTime(startDateTime.toDate());
     if (startDateTime.toDate()) {
